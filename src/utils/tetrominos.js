@@ -63,7 +63,6 @@ export const TETROMINOS = {
   }, 
 };
 
-
 export const randomTetromino = () => {
   const tetrominos = 'IJLOSTZ';
   const randTetromino = tetrominos[getRandomNumber(tetrominos.length)];
