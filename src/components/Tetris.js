@@ -43,10 +43,8 @@ const Tetris = () => {
         movePlayer(1);
       } else if (keyCode === 40) {
         dropPlayer();
-      } else {
-
-      }
-    }
+      };
+    };
   };
 
   return (
