@@ -8,6 +8,7 @@ export const useStage = (player, resetPlayer) => {
   useEffect(() => {
     const updateStage = prevStage => {
       const newStage = prevStage.map(row => 
+        // First flush the stage
           row.map(cell => (cell[1] === 'clear' ? [0, 'clear']: cell)),
         );
 
