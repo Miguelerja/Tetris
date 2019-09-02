@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { StyledTetrisWrapper, StyledTetris } from './styles/StyledTetris';
 
 import { useStage, useInterval, usePlayer } from '../hooks/index';
-import { createStage } from '../utils/gameHelpers';
+import { createStage, checkCollision } from '../utils/gameHelpers';
 
 import Stage from './Stage';
 import Display from './Display';
@@ -14,12 +14,14 @@ const Tetris = () => {
   const [gameOver, setGameOver] = useState(false);
 
   const [player, updatePlayerPos, resetPlayer] = usePlayer();
-  const [stage, setStage] = useStage(player);
+  const [stage, setStage] = useStage(player, resetPlayer);
 
   console.log('re-renderer');
 
   const movePlayer = dir => {
-    updatePlayerPos({ x: dir, y: 0 });
+    if (!checkCollision(player, stage, { x: dir, y: 0 })) {
+      updatePlayerPos({ x: dir, y: 0 });
+    };
   };
 
   const startGame = () => {
