@@ -26,6 +26,7 @@ const Tetris = () => {
 
   const startGame = () => {
     setStage(createStage());
+    setdropTime(1000);
     resetPlayer();
     setGameOver(false);
   };
@@ -44,7 +45,16 @@ const Tetris = () => {
     };
   };
 
+  const keypUp = ({ keyCode }) => {
+    if (!gameOver) {
+      if (keyCode === 40) {
+        setdropTime(1000);
+      }
+    }
+  };
+
   const dropPlayer = () => {
+    setdropTime(null);
     drop();
   };
 
@@ -62,8 +72,12 @@ const Tetris = () => {
     };
   };
 
+  useInterval(() => {
+    drop();
+  }, dropTime);
+
   return (
-    <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={e => move(e)}>
+    <StyledTetrisWrapper role="button" tabIndex="0" onKeyDown={e => move(e)} onKeyUp={keypUp}>
       <StyledTetris>
         <Stage stage={stage} />
         <aside>
